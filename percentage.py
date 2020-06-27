@@ -20,7 +20,9 @@ from itertools import chain
 from typing import DefaultDict, Iterable, TextIO, Tuple
 
 ParsedData = DefaultDict[str, int]
-Row = Tuple[str, str, str]
+Row = Tuple[str, ...]
+Lengths = Tuple[int, ...]
+
 
 TAG_HEADER = "Tag"
 DURATION_HEADER = "Duration"
@@ -41,12 +43,12 @@ def format_percentage(value: float) -> str:
     return f"{value:6,.1%}"
 
 
-def row_str(row: Row, lengths: Iterable[int]) -> str:
+def row_str(row: Row, lengths: Lengths) -> str:
     return COLUMN_SPACING.join(f"{value:{length}}" for value, length in zip(row, lengths))
 
 
-def separator_str(lengths: Iterable[int]) -> str:
-    return row_str((SEPARATOR_CHAR * length for length in lengths), lengths)
+def separator_str(lengths: Lengths) -> str:
+    return row_str(tuple(SEPARATOR_CHAR * length for length in lengths), lengths)
 
 
 def ghetto_tabulate(totals: ParsedData) -> None:
@@ -61,7 +63,7 @@ def ghetto_tabulate(totals: ParsedData) -> None:
     )
     body = [(tag, format_seconds(seconds), format_percentage(seconds / total)) for tag, seconds in items]
     footer = ("Total", format_seconds(total), format_percentage(1))
-    lengths = [max(len(row[i]) for row in chain([header, footer], body)) for i in range(3)]
+    lengths = tuple(max(len(row[i]) for row in chain([header, footer], body)) for i in range(3))
     output = "\n".join(
         [row_str(header, lengths), separator_str(lengths)]
         + [row_str(row, lengths) for row in body]

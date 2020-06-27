@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Extensions for Timewarrior"
 authors = ["Viliam Valent <viliam@valent.email>"]
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/ViliamV/timewarrior-extensions"
+
+keywords = ["timewarrior", "timew", "extensions"]
 
 [tool.poetry.dependencies]
 python = ">=3.7"
@@ -13,9 +17,21 @@ mypy = "^0.782"
 black = "^19.10b0"
 isort = "^4.3.21"
 
+[tool.poetry.scripts]
+timewarrior_percentage_install = 'timewarrior_extensions.install:install_percentage'
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
 
 [tool.black]
 line_length = 110
+
+[tool.isort]
+line_length = 110
+atomic = true
+include_trailing_comma = true
+lines_after_imports = 2
+lines_between_types = 1
+multi_line_output = 3
+use_parentheses = true

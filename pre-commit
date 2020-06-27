@@ -17,11 +17,11 @@ success() {
 cd $(git rev-parse --show-toplevel)
 
 header mypy
-poetry run mypy *.py || exit 1
+poetry run mypy timewarrior_extensions || exit 1
 header isort
-poetry run isort *.py
+poetry run isort -rc timewarrior_extensions
 header black
-poetry run black *.py 
+poetry run black timewarrior_extensions
 git add -u
 # header tests
 # poetry run python -m unittest || exit 1

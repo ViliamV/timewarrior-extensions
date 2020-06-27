@@ -14,10 +14,12 @@ timew percentage :lastweek/:week/:day
 
 import json
 import sys
+
 from collections import defaultdict
 from datetime import datetime
 from itertools import chain
 from typing import DefaultDict, Iterable, TextIO, Tuple
+
 
 ParsedData = DefaultDict[str, int]
 Row = Tuple[str, ...]

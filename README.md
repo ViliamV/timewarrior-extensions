@@ -2,15 +2,21 @@
 Extensions for [Timewarrior](https://timewarrior.net/)
 
 ## Installation
+Install the extensions
+
 ```sh
-  git clone https://github.com/ViliamV/timewarrior-extensions.git
-  cd timewarrior-extensions
-  ln -rs *.py ~/.timewarrior/extensions/
+  pip install --user timewarrior-extensions
 ```
+And install extensions you want
 
 ## Extensions
 ### Percentage
 Time report with %
+
+#### Installation
+```
+timewarrior_percentage_install
+```
 
 #### Usage
 ```sh
@@ -34,9 +40,12 @@ S               0:01        0.2%
 --------------  --------  -------
 Total           6:40      100.0%
 ```
+
 ## Development
 
 ```sh
+  git clone https://github.com/ViliamV/timewarrior-extensions.git
+  cd timewarrior-extensions
   poetry install
   ln -rs pre-commit .git/hooks/
 ```

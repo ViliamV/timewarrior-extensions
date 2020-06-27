@@ -1,0 +1,30 @@
+#!/bin/bash
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+BLUE=$(tput setaf 4)
+export BOLD=$(tput bold)
+export NOCOLOR=$(tput sgr0)
+
+header() {
+  echo "${BLUE}${BOLD}$@${NOCOLOR}"
+}
+
+success() {
+  echo "${GREEN}${BOLD}Done${NOCOLOR}"
+}
+
+# Go to project root
+cd $(git rev-parse --show-toplevel)
+
+header mypy
+poetry run mypy *.py || exit 1
+header isort
+poetry run isort *.py
+header black
+poetry run black *.py 
+git add -u
+# header tests
+# poetry run python -m unittest || exit 1
+success
+exit 0
+

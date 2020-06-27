@@ -34,3 +34,9 @@ S               0:01        0.2%
 --------------  --------  -------
 Total           6:40      100.0%
 ```
+## Development
+
+```sh
+  poetry install
+  ln -rs pre-commit .git/hooks/
+```
